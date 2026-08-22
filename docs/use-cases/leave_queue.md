@@ -25,7 +25,9 @@ The player is removed from the queue
 
 ### **Given**  
 
-The player is not in the queue
+- Discord server
+- The player is not in the queue
+- The player has appropriate role on a server
 
 ### **When**
 

@@ -26,7 +26,9 @@ The player is added to the queue
 
 ### **Given**  
 
-The player is already in the queue
+- Discord server  
+- The player has appropriate role on a server
+- The player is already in the queue
 
 ### **When**
 
