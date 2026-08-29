@@ -1,0 +1,154 @@
+{
+  "configuration" : {
+    "scope" : "SoftwareSystem"
+  },
+  "description" : "Matchmaking System",
+  "documentation" : { },
+  "id" : 1,
+  "lastModifiedDate" : "2026-08-29T18:25:08Z",
+  "model" : {
+    "people" : [ {
+      "id" : "1",
+      "name" : "User",
+      "properties" : {
+        "structurizr.dsl.identifier" : "u"
+      },
+      "relationships" : [ {
+        "description" : "Interacts with",
+        "destinationId" : "2",
+        "id" : "5",
+        "sourceId" : "1",
+        "tags" : "Relationship"
+      } ],
+      "tags" : "Element,Person"
+    } ],
+    "softwareSystems" : [ {
+      "documentation" : { },
+      "id" : "2",
+      "name" : "Discord Bot",
+      "properties" : {
+        "structurizr.dsl.identifier" : "discordBot"
+      },
+      "relationships" : [ {
+        "description" : "Sends requests to",
+        "destinationId" : "4",
+        "id" : "6",
+        "sourceId" : "2",
+        "tags" : "Relationship"
+      }, {
+        "description" : "Sends requests to",
+        "destinationId" : "3",
+        "id" : "7",
+        "linkedRelationshipId" : "6",
+        "sourceId" : "2"
+      } ],
+      "tags" : "Element,Software System"
+    }, {
+      "containers" : [ {
+        "documentation" : { },
+        "id" : "4",
+        "name" : "Database",
+        "properties" : {
+          "structurizr.dsl.identifier" : "mms.db"
+        },
+        "tags" : "Element,Container,Database"
+      } ],
+      "documentation" : { },
+      "id" : "3",
+      "name" : "Matchmaking System",
+      "properties" : {
+        "structurizr.dsl.identifier" : "mms"
+      },
+      "tags" : "Element,Software System"
+    } ]
+  },
+  "name" : "MMS",
+  "properties" : {
+    "structurizr.inspection.error" : "11",
+    "structurizr.dsl" : "d29ya3NwYWNlICJNTVMiICJNYXRjaG1ha2luZyBTeXN0ZW0iIHsKCiAgICAhaWRlbnRpZmllcnMgaGllcmFyY2hpY2FsCgogICAgbW9kZWwgewogICAgICAgIHUgPSBwZXJzb24gIlVzZXIiCiAgICAgICAgZGlzY29yZEJvdCA9IHNvZnR3YXJlU3lzdGVtICJEaXNjb3JkIEJvdCIKICAgICAgICBtbXMgPSBzb2Z0d2FyZVN5c3RlbSAiTWF0Y2htYWtpbmcgU3lzdGVtIiB7CiAgICAgICAgICAgIGRiID0gY29udGFpbmVyICJEYXRhYmFzZSIgewogICAgICAgICAgICAgICAgdGFncyAiRGF0YWJhc2UiCiAgICAgICAgICAgIH0KICAgICAgICB9CgogICAgICAgIHUgLT4gZGlzY29yZEJvdCAiSW50ZXJhY3RzIHdpdGgiCiAgICAgICAgZGlzY29yZEJvdCAtPiBtbXMuZGIgIlNlbmRzIHJlcXVlc3RzIHRvIgogICAgfQoKICAgIHZpZXdzIHsKICAgICAgICBzeXN0ZW1MYW5kc2NhcGUgIlN5c3RlbUxhbmRzY2FwZSIgewogICAgICAgICAgICBpbmNsdWRlICoKICAgICAgICB9CgogICAgICAgIHN5c3RlbUNvbnRleHQgbW1zICJNYXRjaG1ha2luZ1N5c3RlbUNvbnRleHQiIHsKICAgICAgICAgICAgaW5jbHVkZSAqCiAgICAgICAgfQoKICAgICAgICBzdHlsZXMgewogICAgICAgICAgICBlbGVtZW50ICJFbGVtZW50IiB7CiAgICAgICAgICAgICAgICBjb2xvciAjZmZmZmZmCiAgICAgICAgICAgIH0KICAgICAgICAgICAgZWxlbWVudCAiUGVyc29uIiB7CiAgICAgICAgICAgICAgICBiYWNrZ3JvdW5kICMwNTUyN2QKICAgICAgICAgICAgICAgIHN0cm9rZSAjMDU1MjdkCiAgICAgICAgICAgICAgICBzaGFwZSBwZXJzb24KICAgICAgICAgICAgfQogICAgICAgICAgICBlbGVtZW50ICJDb250YWluZXIiIHsKICAgICAgICAgICAgICAgIGJhY2tncm91bmQgIzA3NzNhZgogICAgICAgICAgICB9CiAgICAgICAgICAgIGVsZW1lbnQgIkRhdGFiYXNlIiB7CiAgICAgICAgICAgICAgICBiYWNrZ3JvdW5kICMwNzczYWYKICAgICAgICAgICAgICAgIHNoYXBlIGN5bGluZGVyCiAgICAgICAgICAgIH0KICAgICAgICAgICAgZWxlbWVudCAiU29mdHdhcmUgU3lzdGVtIiB7CiAgICAgICAgICAgICAgICBiYWNrZ3JvdW5kICMwNzczYWYKICAgICAgICAgICAgfQogICAgICAgICAgICBlbGVtZW50ICJCb3VuZGFyeSIgewogICAgICAgICAgICAgICAgc3Ryb2tlV2lkdGggNQogICAgICAgICAgICB9CiAgICAgICAgICAgIHJlbGF0aW9uc2hpcCAiUmVsYXRpb25zaGlwIiB7CiAgICAgICAgICAgICAgICB0aGlja25lc3MgNAogICAgICAgICAgICB9CiAgICAgICAgfQogICAgfQoKICAgIGNvbmZpZ3VyYXRpb24gewogICAgICAgIHNjb3BlIHNvZnR3YXJlc3lzdGVtCiAgICB9Cgp9",
+    "structurizr.inspection.info" : "0",
+    "structurizr.inspection.ignore" : "0",
+    "structurizr.inspection.warning" : "0"
+  },
+  "views" : {
+    "configuration" : {
+      "lastSavedView" : "MatchmakingSystemContainer",
+      "styles" : {
+        "elements" : [ {
+          "strokeWidth" : 5,
+          "tag" : "Boundary"
+        }, {
+          "background" : "#0773af",
+          "tag" : "Container"
+        }, {
+          "background" : "#0773af",
+          "shape" : "Cylinder",
+          "tag" : "Database"
+        }, {
+          "color" : "#ffffff",
+          "tag" : "Element"
+        }, {
+          "background" : "#05527d",
+          "shape" : "Person",
+          "stroke" : "#05527d",
+          "tag" : "Person"
+        }, {
+          "background" : "#0773af",
+          "tag" : "Software System"
+        } ],
+        "relationships" : [ {
+          "tag" : "Relationship",
+          "thickness" : 4
+        } ]
+      },
+      "terminology" : { }
+    },
+    "systemContextViews" : [ {
+      "elements" : [ {
+        "id" : "2",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "3",
+        "x" : 0,
+        "y" : 0
+      } ],
+      "enterpriseBoundaryVisible" : true,
+      "key" : "MatchmakingSystemContext",
+      "name" : "System Context View: Matchmaking System",
+      "order" : 2,
+      "relationships" : [ {
+        "id" : "7"
+      } ],
+      "softwareSystemId" : "3"
+    } ],
+    "systemLandscapeViews" : [ {
+      "dimensions" : {
+        "height" : 1500,
+        "width" : 850
+      },
+      "elements" : [ {
+        "id" : "1",
+        "x" : 225,
+        "y" : 159
+      }, {
+        "id" : "2",
+        "x" : 200,
+        "y" : 609
+      }, {
+        "id" : "3",
+        "x" : 200,
+        "y" : 985
+      } ],
+      "enterpriseBoundaryVisible" : true,
+      "key" : "SystemLandscape",
+      "name" : "System Landscape View",
+      "order" : 1,
+      "relationships" : [ {
+        "id" : "5"
+      }, {
+        "id" : "7"
+      } ]
+    } ]
+  }
+}
