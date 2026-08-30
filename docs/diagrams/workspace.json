@@ -5,7 +5,7 @@
   "description" : "Matchmaking System",
   "documentation" : { },
   "id" : 1,
-  "lastModifiedDate" : "2026-08-29T18:25:08Z",
+  "lastModifiedDate" : "2026-08-30T20:00:45Z",
   "model" : {
     "people" : [ {
       "id" : "1",
@@ -15,46 +15,262 @@
       },
       "relationships" : [ {
         "description" : "Interacts with",
-        "destinationId" : "2",
-        "id" : "5",
+        "destinationId" : "3",
+        "id" : "14",
         "sourceId" : "1",
+        "tags" : "Relationship"
+      } ],
+      "tags" : "Element,Person"
+    }, {
+      "id" : "2",
+      "name" : "Admin",
+      "properties" : {
+        "structurizr.dsl.identifier" : "admin"
+      },
+      "relationships" : [ {
+        "description" : "Manages",
+        "destinationId" : "3",
+        "id" : "15",
+        "sourceId" : "2",
         "tags" : "Relationship"
       } ],
       "tags" : "Element,Person"
     } ],
     "softwareSystems" : [ {
       "documentation" : { },
-      "id" : "2",
+      "id" : "3",
       "name" : "Discord Bot",
       "properties" : {
         "structurizr.dsl.identifier" : "discordBot"
       },
       "relationships" : [ {
         "description" : "Sends requests to",
-        "destinationId" : "4",
-        "id" : "6",
-        "sourceId" : "2",
+        "destinationId" : "6",
+        "id" : "16",
+        "sourceId" : "3",
         "tags" : "Relationship"
       }, {
         "description" : "Sends requests to",
-        "destinationId" : "3",
-        "id" : "7",
-        "linkedRelationshipId" : "6",
-        "sourceId" : "2"
+        "destinationId" : "5",
+        "id" : "17",
+        "linkedRelationshipId" : "16",
+        "sourceId" : "3"
+      }, {
+        "description" : "Sends requests to",
+        "destinationId" : "4",
+        "id" : "18",
+        "linkedRelationshipId" : "16",
+        "sourceId" : "3"
       } ],
       "tags" : "Element,Software System"
     }, {
       "containers" : [ {
+        "components" : [ {
+          "documentation" : { },
+          "id" : "6",
+          "name" : "Discord API Adapter",
+          "properties" : {
+            "structurizr.dsl.identifier" : "discordApiAdapter"
+          },
+          "relationships" : [ {
+            "description" : "Add player",
+            "destinationId" : "8",
+            "id" : "19",
+            "sourceId" : "6",
+            "tags" : "Relationship"
+          }, {
+            "description" : "Remove player",
+            "destinationId" : "8",
+            "id" : "20",
+            "sourceId" : "6",
+            "tags" : "Relationship"
+          }, {
+            "description" : "Show player statistics",
+            "destinationId" : "8",
+            "id" : "21",
+            "sourceId" : "6",
+            "tags" : "Relationship"
+          }, {
+            "description" : "Show top players",
+            "destinationId" : "8",
+            "id" : "22",
+            "sourceId" : "6",
+            "tags" : "Relationship"
+          }, {
+            "description" : "Create room",
+            "destinationId" : "9",
+            "id" : "23",
+            "sourceId" : "6",
+            "tags" : "Relationship"
+          }, {
+            "description" : "Join queue",
+            "destinationId" : "11",
+            "id" : "24",
+            "sourceId" : "6",
+            "tags" : "Relationship"
+          }, {
+            "description" : "Leave queue",
+            "destinationId" : "11",
+            "id" : "25",
+            "sourceId" : "6",
+            "tags" : "Relationship"
+          }, {
+            "description" : "Submit match result",
+            "destinationId" : "12",
+            "id" : "26",
+            "sourceId" : "6",
+            "tags" : "Relationship"
+          }, {
+            "description" : "Confirm match result",
+            "destinationId" : "12",
+            "id" : "27",
+            "sourceId" : "6",
+            "tags" : "Relationship"
+          }, {
+            "description" : "Manually cancel match",
+            "destinationId" : "12",
+            "id" : "28",
+            "sourceId" : "6",
+            "tags" : "Relationship"
+          } ],
+          "tags" : "Element,Component"
+        }, {
+          "documentation" : { },
+          "id" : "7",
+          "name" : "Player",
+          "properties" : {
+            "structurizr.dsl.identifier" : "player"
+          },
+          "tags" : "Element,Component"
+        }, {
+          "documentation" : { },
+          "id" : "8",
+          "name" : "Ranking",
+          "properties" : {
+            "structurizr.dsl.identifier" : "ranking"
+          },
+          "relationships" : [ {
+            "description" : "Create player",
+            "destinationId" : "7",
+            "id" : "37",
+            "sourceId" : "8",
+            "tags" : "Relationship"
+          }, {
+            "description" : "Delete player",
+            "destinationId" : "7",
+            "id" : "38",
+            "sourceId" : "8",
+            "tags" : "Relationship"
+          }, {
+            "description" : "Get player info",
+            "destinationId" : "7",
+            "id" : "39",
+            "sourceId" : "8",
+            "tags" : "Relationship"
+          } ],
+          "tags" : "Element,Component"
+        }, {
+          "documentation" : { },
+          "id" : "9",
+          "name" : "Room Creator",
+          "properties" : {
+            "structurizr.dsl.identifier" : "roomCreator"
+          },
+          "tags" : "Element,Component"
+        }, {
+          "documentation" : { },
+          "id" : "10",
+          "name" : "Matchmaker",
+          "properties" : {
+            "structurizr.dsl.identifier" : "matchMaker"
+          },
+          "relationships" : [ {
+            "description" : "Update queue",
+            "destinationId" : "11",
+            "id" : "31",
+            "sourceId" : "10",
+            "tags" : "Relationship"
+          }, {
+            "description" : "Create match",
+            "destinationId" : "12",
+            "id" : "32",
+            "sourceId" : "10",
+            "tags" : "Relationship"
+          }, {
+            "description" : "Update match",
+            "destinationId" : "12",
+            "id" : "33",
+            "sourceId" : "10",
+            "tags" : "Relationship"
+          }, {
+            "description" : "Get players ranking",
+            "destinationId" : "8",
+            "id" : "34",
+            "sourceId" : "10",
+            "tags" : "Relationship"
+          } ],
+          "tags" : "Element,Component"
+        }, {
+          "documentation" : { },
+          "id" : "11",
+          "name" : "Queue",
+          "properties" : {
+            "structurizr.dsl.identifier" : "queue"
+          },
+          "relationships" : [ {
+            "description" : "Player joined queue event",
+            "destinationId" : "10",
+            "id" : "29",
+            "sourceId" : "11",
+            "tags" : "Relationship,Event"
+          }, {
+            "description" : "Player left queue event",
+            "destinationId" : "10",
+            "id" : "30",
+            "sourceId" : "11",
+            "tags" : "Relationship,Event"
+          } ],
+          "tags" : "Element,Component"
+        }, {
+          "documentation" : { },
+          "id" : "12",
+          "name" : "Match",
+          "properties" : {
+            "structurizr.dsl.identifier" : "match"
+          },
+          "relationships" : [ {
+            "description" : "Create room",
+            "destinationId" : "9",
+            "id" : "35",
+            "sourceId" : "12",
+            "tags" : "Relationship"
+          }, {
+            "description" : "Update players ranking",
+            "destinationId" : "8",
+            "id" : "36",
+            "sourceId" : "12",
+            "tags" : "Relationship"
+          } ],
+          "tags" : "Element,Component"
+        } ],
         "documentation" : { },
-        "id" : "4",
+        "id" : "5",
+        "name" : "Backend",
+        "properties" : {
+          "structurizr.dsl.identifier" : "backend"
+        },
+        "tags" : "Element,Container"
+      }, {
+        "documentation" : { },
+        "id" : "13",
         "name" : "Database",
         "properties" : {
-          "structurizr.dsl.identifier" : "mms.db"
+          "structurizr.dsl.identifier" : "db"
         },
         "tags" : "Element,Container,Database"
       } ],
       "documentation" : { },
-      "id" : "3",
+      "id" : "4",
       "name" : "Matchmaking System",
       "properties" : {
         "structurizr.dsl.identifier" : "mms"
@@ -64,19 +280,114 @@
   },
   "name" : "MMS",
   "properties" : {
-    "structurizr.inspection.error" : "11",
-    "structurizr.dsl" : "d29ya3NwYWNlICJNTVMiICJNYXRjaG1ha2luZyBTeXN0ZW0iIHsKCiAgICAhaWRlbnRpZmllcnMgaGllcmFyY2hpY2FsCgogICAgbW9kZWwgewogICAgICAgIHUgPSBwZXJzb24gIlVzZXIiCiAgICAgICAgZGlzY29yZEJvdCA9IHNvZnR3YXJlU3lzdGVtICJEaXNjb3JkIEJvdCIKICAgICAgICBtbXMgPSBzb2Z0d2FyZVN5c3RlbSAiTWF0Y2htYWtpbmcgU3lzdGVtIiB7CiAgICAgICAgICAgIGRiID0gY29udGFpbmVyICJEYXRhYmFzZSIgewogICAgICAgICAgICAgICAgdGFncyAiRGF0YWJhc2UiCiAgICAgICAgICAgIH0KICAgICAgICB9CgogICAgICAgIHUgLT4gZGlzY29yZEJvdCAiSW50ZXJhY3RzIHdpdGgiCiAgICAgICAgZGlzY29yZEJvdCAtPiBtbXMuZGIgIlNlbmRzIHJlcXVlc3RzIHRvIgogICAgfQoKICAgIHZpZXdzIHsKICAgICAgICBzeXN0ZW1MYW5kc2NhcGUgIlN5c3RlbUxhbmRzY2FwZSIgewogICAgICAgICAgICBpbmNsdWRlICoKICAgICAgICB9CgogICAgICAgIHN5c3RlbUNvbnRleHQgbW1zICJNYXRjaG1ha2luZ1N5c3RlbUNvbnRleHQiIHsKICAgICAgICAgICAgaW5jbHVkZSAqCiAgICAgICAgfQoKICAgICAgICBzdHlsZXMgewogICAgICAgICAgICBlbGVtZW50ICJFbGVtZW50IiB7CiAgICAgICAgICAgICAgICBjb2xvciAjZmZmZmZmCiAgICAgICAgICAgIH0KICAgICAgICAgICAgZWxlbWVudCAiUGVyc29uIiB7CiAgICAgICAgICAgICAgICBiYWNrZ3JvdW5kICMwNTUyN2QKICAgICAgICAgICAgICAgIHN0cm9rZSAjMDU1MjdkCiAgICAgICAgICAgICAgICBzaGFwZSBwZXJzb24KICAgICAgICAgICAgfQogICAgICAgICAgICBlbGVtZW50ICJDb250YWluZXIiIHsKICAgICAgICAgICAgICAgIGJhY2tncm91bmQgIzA3NzNhZgogICAgICAgICAgICB9CiAgICAgICAgICAgIGVsZW1lbnQgIkRhdGFiYXNlIiB7CiAgICAgICAgICAgICAgICBiYWNrZ3JvdW5kICMwNzczYWYKICAgICAgICAgICAgICAgIHNoYXBlIGN5bGluZGVyCiAgICAgICAgICAgIH0KICAgICAgICAgICAgZWxlbWVudCAiU29mdHdhcmUgU3lzdGVtIiB7CiAgICAgICAgICAgICAgICBiYWNrZ3JvdW5kICMwNzczYWYKICAgICAgICAgICAgfQogICAgICAgICAgICBlbGVtZW50ICJCb3VuZGFyeSIgewogICAgICAgICAgICAgICAgc3Ryb2tlV2lkdGggNQogICAgICAgICAgICB9CiAgICAgICAgICAgIHJlbGF0aW9uc2hpcCAiUmVsYXRpb25zaGlwIiB7CiAgICAgICAgICAgICAgICB0aGlja25lc3MgNAogICAgICAgICAgICB9CiAgICAgICAgfQogICAgfQoKICAgIGNvbmZpZ3VyYXRpb24gewogICAgICAgIHNjb3BlIHNvZnR3YXJlc3lzdGVtCiAgICB9Cgp9",
+    "structurizr.inspection.error" : "53",
+    "structurizr.dsl" : "d29ya3NwYWNlICJNTVMiICJNYXRjaG1ha2luZyBTeXN0ZW0iIHsKCiAgICBtb2RlbCB7CiAgICAgICAgdSA9IHBlcnNvbiAiVXNlciIKICAgICAgICBhZG1pbiA9IHBlcnNvbiAiQWRtaW4iCiAgICAgICAgZGlzY29yZEJvdCA9IHNvZnR3YXJlU3lzdGVtICJEaXNjb3JkIEJvdCIKICAgICAgICBtbXMgPSBzb2Z0d2FyZVN5c3RlbSAiTWF0Y2htYWtpbmcgU3lzdGVtIiB7CiAgICAgICAgICAgIGJhY2tlbmQgPSBjb250YWluZXIgIkJhY2tlbmQiIHsKICAgICAgICAgICAgICAgIGRpc2NvcmRBcGlBZGFwdGVyID0gY29tcG9uZW50ICJEaXNjb3JkIEFQSSBBZGFwdGVyIgogICAgICAgICAgICAgICAgcGxheWVyID0gY29tcG9uZW50ICJQbGF5ZXIiCiAgICAgICAgICAgICAgICByYW5raW5nID0gY29tcG9uZW50ICJSYW5raW5nIgogICAgICAgICAgICAgICAgcm9vbUNyZWF0b3IgPSBjb21wb25lbnQgIlJvb20gQ3JlYXRvciIKICAgICAgICAgICAgICAgIG1hdGNoTWFrZXIgPSBjb21wb25lbnQgIk1hdGNobWFrZXIiCiAgICAgICAgICAgICAgICBxdWV1ZSA9IGNvbXBvbmVudCAiUXVldWUiCiAgICAgICAgICAgICAgICBtYXRjaCA9IGNvbXBvbmVudCAiTWF0Y2giCiAgICAgICAgICAgIH0KICAgICAgICAgICAgZGIgPSBjb250YWluZXIgIkRhdGFiYXNlIiB7CiAgICAgICAgICAgICAgICB0YWdzICJEYXRhYmFzZSIKICAgICAgICAgICAgfQogICAgICAgIH0KCiAgICAgICAgdSAtPiBkaXNjb3JkQm90ICJJbnRlcmFjdHMgd2l0aCIKCiAgICAgICAgYWRtaW4gLT4gZGlzY29yZEJvdCAiTWFuYWdlcyIKCiAgICAgICAgZGlzY29yZEJvdCAtPiBkaXNjb3JkQXBpQWRhcHRlciAiU2VuZHMgcmVxdWVzdHMgdG8iCgogICAgICAgIGRpc2NvcmRBcGlBZGFwdGVyIC0+IHJhbmtpbmcgIkFkZCBwbGF5ZXIiCiAgICAgICAgZGlzY29yZEFwaUFkYXB0ZXIgLT4gcmFua2luZyAiUmVtb3ZlIHBsYXllciIKICAgICAgICBkaXNjb3JkQXBpQWRhcHRlciAtPiByYW5raW5nICJTaG93IHBsYXllciBzdGF0aXN0aWNzIgogICAgICAgIGRpc2NvcmRBcGlBZGFwdGVyIC0+IHJhbmtpbmcgIlNob3cgdG9wIHBsYXllcnMiCiAgICAgICAgZGlzY29yZEFwaUFkYXB0ZXIgLT4gcm9vbUNyZWF0b3IgIkNyZWF0ZSByb29tIgogICAgICAgIGRpc2NvcmRBcGlBZGFwdGVyIC0+IHF1ZXVlICJKb2luIHF1ZXVlIgogICAgICAgIGRpc2NvcmRBcGlBZGFwdGVyIC0+IHF1ZXVlICJMZWF2ZSBxdWV1ZSIKICAgICAgICBkaXNjb3JkQXBpQWRhcHRlciAtPiBtYXRjaCAiU3VibWl0IG1hdGNoIHJlc3VsdCIKICAgICAgICBkaXNjb3JkQXBpQWRhcHRlciAtPiBtYXRjaCAiQ29uZmlybSBtYXRjaCByZXN1bHQiCiAgICAgICAgZGlzY29yZEFwaUFkYXB0ZXIgLT4gbWF0Y2ggIk1hbnVhbGx5IGNhbmNlbCBtYXRjaCIKCiAgICAgICAgcXVldWUgLT4gbWF0Y2hNYWtlciAiUGxheWVyIGpvaW5lZCBxdWV1ZSBldmVudCIgewogICAgICAgICAgICB0YWdzICJFdmVudCIKICAgICAgICB9CiAgICAgICAgcXVldWUgLT4gbWF0Y2hNYWtlciAiUGxheWVyIGxlZnQgcXVldWUgZXZlbnQiIHsKICAgICAgICAgICAgdGFncyAiRXZlbnQiCiAgICAgICAgfQoKICAgICAgICBtYXRjaE1ha2VyIC0+IHF1ZXVlICJVcGRhdGUgcXVldWUiCiAgICAgICAgbWF0Y2hNYWtlciAtPiBtYXRjaCAiQ3JlYXRlIG1hdGNoIgogICAgICAgIG1hdGNoTWFrZXIgLT4gbWF0Y2ggIlVwZGF0ZSBtYXRjaCIKICAgICAgICBtYXRjaE1ha2VyIC0+IHJhbmtpbmcgIkdldCBwbGF5ZXJzIHJhbmtpbmciCgogICAgICAgIG1hdGNoIC0+IHJvb21DcmVhdG9yICJDcmVhdGUgcm9vbSIKICAgICAgICBtYXRjaCAtPiByYW5raW5nICJVcGRhdGUgcGxheWVycyByYW5raW5nIgoKICAgICAgICByYW5raW5nIC0+IHBsYXllciAiQ3JlYXRlIHBsYXllciIKICAgICAgICByYW5raW5nIC0+IHBsYXllciAiRGVsZXRlIHBsYXllciIKICAgICAgICByYW5raW5nIC0+IHBsYXllciAiR2V0IHBsYXllciBpbmZvIgoKCiAgICB9CgogICAgdmlld3MgewogICAgICAgIHN5c3RlbUxhbmRzY2FwZSAiTU1TX0xhbmRzY2FwZSIgewogICAgICAgICAgICBpbmNsdWRlICoKICAgICAgICAgICAgYXV0b0xheW91dCBscgogICAgICAgIH0KCiAgICAgICAgY29tcG9uZW50IGJhY2tlbmQgYmFja2VuZF9jb21wb25lbnRzIHsKICAgICAgICAgICAgaW5jbHVkZSAqCiAgICAgICAgICAgIGF1dG9MYXlvdXQgbHIKICAgICAgICB9CgogICAgICAgIHN0eWxlcyB7CiAgICAgICAgICAgIGVsZW1lbnQgIkVsZW1lbnQiIHsKICAgICAgICAgICAgICAgIGNvbG9yICNmZmZmZmYKICAgICAgICAgICAgfQogICAgICAgICAgICBlbGVtZW50ICJQZXJzb24iIHsKICAgICAgICAgICAgICAgIGJhY2tncm91bmQgIzA1NTI3ZAogICAgICAgICAgICAgICAgc3Ryb2tlICMwNTUyN2QKICAgICAgICAgICAgICAgIHNoYXBlIHBlcnNvbgogICAgICAgICAgICB9CiAgICAgICAgICAgIGVsZW1lbnQgIkNvbnRhaW5lciIgewogICAgICAgICAgICAgICAgYmFja2dyb3VuZCAjMDc3M2FmCiAgICAgICAgICAgIH0KICAgICAgICAgICAgZWxlbWVudCAiQ29tcG9uZW50IiB7CiAgICAgICAgICAgICAgICBiYWNrZ3JvdW5kICMyMzkwYjkKICAgICAgICAgICAgfQogICAgICAgICAgICBlbGVtZW50ICJEYXRhYmFzZSIgewogICAgICAgICAgICAgICAgYmFja2dyb3VuZCAjMDc3M2FmCiAgICAgICAgICAgICAgICBzaGFwZSBjeWxpbmRlcgogICAgICAgICAgICB9CiAgICAgICAgICAgIGVsZW1lbnQgIlNvZnR3YXJlIFN5c3RlbSIgewogICAgICAgICAgICAgICAgYmFja2dyb3VuZCAjMDc3M2FmCiAgICAgICAgICAgIH0KICAgICAgICAgICAgZWxlbWVudCAiQm91bmRhcnkiIHsKICAgICAgICAgICAgICAgIHN0cm9rZVdpZHRoIDUKICAgICAgICAgICAgfQogICAgICAgICAgICByZWxhdGlvbnNoaXAgIlJlbGF0aW9uc2hpcCIgewogICAgICAgICAgICAgICAgdGhpY2tuZXNzIDQKICAgICAgICAgICAgfQogICAgICAgICAgICByZWxhdGlvbnNoaXAgIkV2ZW50IiB7CiAgICAgICAgICAgICAgICBkYXNoZWQgZmFsc2UKICAgICAgICAgICAgfQogICAgICAgIH0KICAgIH0KCiAgICBjb25maWd1cmF0aW9uIHsKICAgICAgICBzY29wZSBzb2Z0d2FyZXN5c3RlbQogICAgfQoKfQ==",
     "structurizr.inspection.info" : "0",
     "structurizr.inspection.ignore" : "0",
     "structurizr.inspection.warning" : "0"
   },
   "views" : {
+    "componentViews" : [ {
+      "automaticLayout" : {
+        "edgeSeparation" : 50,
+        "nodeSeparation" : 50,
+        "rankDirection" : "LeftRight",
+        "rankSeparation" : 100,
+        "vertices" : true
+      },
+      "containerId" : "5",
+      "elements" : [ {
+        "id" : "3",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "6",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "7",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "8",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "9",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "10",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "11",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "12",
+        "x" : 0,
+        "y" : 0
+      } ],
+      "externalContainerBoundariesVisible" : false,
+      "key" : "backend_components",
+      "name" : "Component View: Matchmaking System - Backend",
+      "order" : 2,
+      "relationships" : [ {
+        "id" : "16"
+      }, {
+        "id" : "19"
+      }, {
+        "id" : "20"
+      }, {
+        "id" : "21"
+      }, {
+        "id" : "22"
+      }, {
+        "id" : "23"
+      }, {
+        "id" : "24"
+      }, {
+        "id" : "25"
+      }, {
+        "id" : "26"
+      }, {
+        "id" : "27"
+      }, {
+        "id" : "28"
+      }, {
+        "id" : "29"
+      }, {
+        "id" : "30"
+      }, {
+        "id" : "31"
+      }, {
+        "id" : "32"
+      }, {
+        "id" : "33"
+      }, {
+        "id" : "34"
+      }, {
+        "id" : "35"
+      }, {
+        "id" : "36"
+      }, {
+        "id" : "37"
+      }, {
+        "id" : "38"
+      }, {
+        "id" : "39"
+      } ]
+    } ],
     "configuration" : {
       "lastSavedView" : "MatchmakingSystemContainer",
       "styles" : {
         "elements" : [ {
           "strokeWidth" : 5,
           "tag" : "Boundary"
+        }, {
+          "background" : "#2390b9",
+          "tag" : "Component"
         }, {
           "background" : "#0773af",
           "tag" : "Container"
@@ -97,57 +408,50 @@
           "tag" : "Software System"
         } ],
         "relationships" : [ {
+          "dashed" : false,
+          "tag" : "Event"
+        }, {
           "tag" : "Relationship",
           "thickness" : 4
         } ]
       },
       "terminology" : { }
     },
-    "systemContextViews" : [ {
-      "elements" : [ {
-        "id" : "2",
-        "x" : 0,
-        "y" : 0
-      }, {
-        "id" : "3",
-        "x" : 0,
-        "y" : 0
-      } ],
-      "enterpriseBoundaryVisible" : true,
-      "key" : "MatchmakingSystemContext",
-      "name" : "System Context View: Matchmaking System",
-      "order" : 2,
-      "relationships" : [ {
-        "id" : "7"
-      } ],
-      "softwareSystemId" : "3"
-    } ],
     "systemLandscapeViews" : [ {
-      "dimensions" : {
-        "height" : 1500,
-        "width" : 850
+      "automaticLayout" : {
+        "edgeSeparation" : 50,
+        "nodeSeparation" : 50,
+        "rankDirection" : "LeftRight",
+        "rankSeparation" : 100,
+        "vertices" : true
       },
       "elements" : [ {
         "id" : "1",
-        "x" : 225,
-        "y" : 159
+        "x" : 0,
+        "y" : 0
       }, {
         "id" : "2",
-        "x" : 200,
-        "y" : 609
+        "x" : 0,
+        "y" : 0
       }, {
         "id" : "3",
-        "x" : 200,
-        "y" : 985
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "4",
+        "x" : 0,
+        "y" : 0
       } ],
       "enterpriseBoundaryVisible" : true,
-      "key" : "SystemLandscape",
+      "key" : "MMS_Landscape",
       "name" : "System Landscape View",
       "order" : 1,
       "relationships" : [ {
-        "id" : "5"
+        "id" : "14"
       }, {
-        "id" : "7"
+        "id" : "15"
+      }, {
+        "id" : "18"
       } ]
     } ]
   }
