@@ -43,9 +43,7 @@ workspace "MMS" "Matchmaking System" {
             tags "Event"
         }
 
-        matchMaker -> queue "Update queue"
         matchMaker -> match "Create match"
-        matchMaker -> match "Update match"
         matchMaker -> ranking "Get players ranking"
 
         match -> roomCreator "Create room"
