@@ -31,3 +31,6 @@ replay_pid*
 
 # Intellij folder
 .idea
+
+# Ignore Kotlin plugin data
+.kotlin
