@@ -5,6 +5,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class MmsApplication {
+
+    //test
     public static void main(String[] args) {
         SpringApplication.run(MmsApplication.class, args);
     }
