@@ -58,6 +58,6 @@ jobs:
           resourceGroup: ${{ env.AZURE_RESOURCE_GROUP }}
           containerAppName: ${{ env.AZURE_CONTAINER_APP }}
           imageToDeploy: ${{ env.DOCKER_IMAGE }}:${{ github.sha }}
-          registryUrl: https://hub.docker.com/repository/docker/tyran99/mms
+          registryUrl: docker.io
           registryUsername: ${{ secrets.DOCKERHUB_USERNAME }}
           registryPassword: ${{ secrets.DOCKERHUB_TOKEN }}
