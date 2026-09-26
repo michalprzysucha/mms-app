@@ -32,6 +32,7 @@ jobs:
         run: ./gradlew build
   build_image:
     name: Build and push Docker image
+    needs: [run_pre_commit, build_code]
     runs-on: ubuntu-latest
     steps:
       - name: Login to Docker Hub
@@ -51,7 +52,7 @@ jobs:
           docker push ${{ env.DOCKER_IMAGE }}:latest
   deploy:
     name: Deploy
-    needs: [run_pre_commit, build_image]
+    needs: [run_pre_commit, build_code, build_image]
     runs-on: ubuntu-latest
     steps:
       - name: Login to Azure
