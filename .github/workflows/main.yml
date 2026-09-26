@@ -58,3 +58,6 @@ jobs:
           resourceGroup: ${{ env.AZURE_RESOURCE_GROUP }}
           containerAppName: ${{ env.AZURE_CONTAINER_APP }}
           imageToDeploy: ${{ env.DOCKER_IMAGE }}:${{ github.sha }}
+          registry: docker.io
+          registryUsername: ${{ secrets.DOCKERHUB_USERNAME }}
+          registryPassword: ${{ secrets.DOCKERHUB_TOKEN }}
