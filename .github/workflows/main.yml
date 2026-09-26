@@ -87,7 +87,7 @@ jobs:
           docker push ${{ env.DOCKER_IMAGE }}:latest
   deploy:
     name: Deploy
-    needs: [build_image]
+    needs: [generate_version, build_image]
     runs-on: ubuntu-latest
     steps:
       - name: Login to Azure
