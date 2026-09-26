@@ -1,4 +1,4 @@
-name: Deploy to Azure Container Apps
+name: Prod - build & deploy
 
 on:
   push:
@@ -9,50 +9,70 @@ env:
   DOCKER_IMAGE: ${{ secrets.DOCKERHUB_USERNAME }}/mms
   AZURE_CONTAINER_APP: mms
   AZURE_RESOURCE_GROUP: rg-mms-prod-polandcentral
+  AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
 jobs:
-  deploy:
+  build_code:
+    name: Build code
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
           distribution: corretto
           java-version: '25'
-
-      - name: Build application
+      - name: Run gradle build
         run: ./gradlew build
-
+      - name: Upload JAR
+        uses: actions/upload-artifact@v4
+        with:
+          name: mms-jar
+          path: build/libs/mms-app.jar
+  build_image:
+    name: Build and push Docker image
+    needs: [build_code]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Download JAR
+        uses: actions/download-artifact@v4
+        with:
+          name: mms-jar
+          path: build/libs
       - name: Login to Docker Hub
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-
       - name: Build Docker image
         run: |
           docker build \
-            -t ${{ env.DOCKER_IMAGE }}:${{ github.sha }} \
-            -t ${{ env.DOCKER_IMAGE }}:latest \
-            .
-
+           -t ${{ env.DOCKER_IMAGE }}:${{ github.sha }} \
+           -t ${{ env.DOCKER_IMAGE }}:latest \
+           .
       - name: Push Docker image
         run: |
           docker push ${{ env.DOCKER_IMAGE }}:${{ github.sha }}
           docker push ${{ env.DOCKER_IMAGE }}:latest
-
+  deploy:
+    name: Deploy
+    needs: [build_code, build_image]
+    runs-on: ubuntu-latest
+    steps:
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
-
+            creds: ${{ secrets.AZURE_CREDENTIALS }}
+            allow-no-subscriptions: false
       - name: Deploy to Azure Container Apps
         uses: azure/container-apps-deploy-action@v2
         with:
-          resourceGroup: ${{ env.AZURE_RESOURCE_GROUP }}
-          containerAppName: ${{ env.AZURE_CONTAINER_APP }}
-          imageToDeploy: ${{ env.DOCKER_IMAGE }}:${{ github.sha }}
+            resourceGroup: ${{ env.AZURE_RESOURCE_GROUP }}
+            containerAppName: ${{ env.AZURE_CONTAINER_APP }}
+            imageToDeploy: ${{ env.DOCKER_IMAGE }}:${{ github.sha }}
+            registryUrl: docker.io
+            registryUsername: ${{ secrets.DOCKERHUB_USERNAME }}
+            registryPassword: ${{ secrets.DOCKERHUB_TOKEN }}
