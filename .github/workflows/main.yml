@@ -29,7 +29,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: mms-jar
-          path: build/libs/mms.jar
+          path: build/libs/mms-app.jar
   build_image:
     name: Build and push Docker image
     needs: [build_code]
