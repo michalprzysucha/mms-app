@@ -12,6 +12,28 @@ env:
   AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
 jobs:
+  generate_version:
+    name: Generate semantic version
+    runs-on: self-hosted
+    outputs:
+      version: ${{ steps.semantic-version.outputs.version }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+            fetch-depth: 0
+            filter: blob:none
+      - name: Generate semantic version
+        id: semantic-version
+        uses: paulhatch/semantic-version@v5.4.0
+        with:
+          tag-prefix: "v"
+          major_pattern: "/!:|BREAKING CHANGE:/"
+          minor_pattern: "/feat(\\(.+\\))?:/"
+          version_format: 'v${MAJOR}.${MINOR}.${PATCH}'
+      - name: Output semantic version
+        run: |
+          echo "Semantic version: ${{ steps.semantic-version.outputs.version }}"
   build_code:
     name: Build code
     runs-on: ubuntu-latest
@@ -32,7 +54,7 @@ jobs:
           path: build/libs/mms-app.jar
   build_image:
     name: Build and push Docker image
-    needs: [build_code]
+    needs: [generate_version, build_code]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -50,16 +72,18 @@ jobs:
       - name: Build Docker image
         run: |
           docker build \
+           -t ${{ env.DOCKER_IMAGE }}:${{ needs.generate_version.outputs.version }} \
            -t ${{ env.DOCKER_IMAGE }}:${{ github.sha }} \
            -t ${{ env.DOCKER_IMAGE }}:latest \
            .
       - name: Push Docker image
         run: |
+          docker push ${{ env.DOCKER_IMAGE }}:${{ needs.generate_version.outputs.version }}
           docker push ${{ env.DOCKER_IMAGE }}:${{ github.sha }}
           docker push ${{ env.DOCKER_IMAGE }}:latest
   deploy:
     name: Deploy
-    needs: [build_code, build_image]
+    needs: [generate_version, build_code, build_image]
     runs-on: ubuntu-latest
     steps:
       - name: Login to Azure
@@ -72,7 +96,23 @@ jobs:
         with:
             resourceGroup: ${{ env.AZURE_RESOURCE_GROUP }}
             containerAppName: ${{ env.AZURE_CONTAINER_APP }}
-            imageToDeploy: ${{ env.DOCKER_IMAGE }}:${{ github.sha }}
+            imageToDeploy: ${{ env.DOCKER_IMAGE }}:${{ needs.generate_version.outputs.version }}
             registryUrl: docker.io
             registryUsername: ${{ secrets.DOCKERHUB_USERNAME }}
             registryPassword: ${{ secrets.DOCKERHUB_TOKEN }}
+  create_tag:
+    name: Create Git tag
+    needs: [ generate_version, deploy ]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Create Git tag
+        run: |
+          git tag ${{ needs.generate_version.outputs.version }}
+          git push origin ${{ needs.generate_version.outputs.version }}
