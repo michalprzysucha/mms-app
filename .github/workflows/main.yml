@@ -27,7 +27,7 @@ jobs:
         id: semantic-version
         uses: paulhatch/semantic-version@v5.4.0
         with:
-          tag-prefix: "v"
+          tag_prefix: "v"
           major_pattern: "/!:|BREAKING CHANGE:/"
           minor_pattern: "/feat(\\(.+\\))?:/"
           version_format: 'v${MAJOR}.${MINOR}.${PATCH}'
