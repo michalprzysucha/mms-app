@@ -25,6 +25,7 @@ jobs:
           java-version: '25'
   build_code:
     name: Build code
+    needs: [run_pre_commit]
     runs-on: ubuntu-latest
     steps:
       - name: Run gradle build
@@ -50,6 +51,7 @@ jobs:
           docker push ${{ env.DOCKER_IMAGE }}:latest
   deploy:
     name: Deploy
+    needs: [run_pre_commit, build_image]
     runs-on: ubuntu-latest
     steps:
       - name: Login to Azure
