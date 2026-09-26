@@ -14,7 +14,6 @@ env:
 jobs:
   build_code:
     name: Build code
-    needs: [run_pre_commit]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
