@@ -30,7 +30,7 @@ jobs:
           tag_prefix: "v"
           major_pattern: "/!:|BREAKING CHANGE:/"
           minor_pattern: "/feat(\\(.+\\))?:/"
-          version_format: 'v${MAJOR}.${MINOR}.${PATCH}'
+          version_format: "${major}.${minor}.${patch}"
       - name: Output semantic version
         run: |
           echo "Semantic version: ${{ steps.semantic-version.outputs.version }}"
