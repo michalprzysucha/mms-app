@@ -14,7 +14,7 @@ env:
 jobs:
   generate_version:
     name: Generate semantic version
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     outputs:
       version: ${{ steps.semantic-version.outputs.version }}
     steps:
@@ -36,6 +36,7 @@ jobs:
           echo "Semantic version: ${{ steps.semantic-version.outputs.version }}"
   build_code:
     name: Build code
+    needs: [generate_version]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -46,7 +47,10 @@ jobs:
           distribution: corretto
           java-version: '25'
       - name: Run gradle build
-        run: ./gradlew build
+        run: |
+          VERSION="${{ needs.generate_version.outputs.version }}"
+          VERSION="${VERSION#v}"
+          ./gradlew build -PappVersion="$VERSION"
       - name: Upload JAR
         uses: actions/upload-artifact@v4
         with:
@@ -83,7 +87,7 @@ jobs:
           docker push ${{ env.DOCKER_IMAGE }}:latest
   deploy:
     name: Deploy
-    needs: [generate_version, build_code, build_image]
+    needs: [build_image]
     runs-on: ubuntu-latest
     steps:
       - name: Login to Azure
@@ -102,7 +106,7 @@ jobs:
             registryPassword: ${{ secrets.DOCKERHUB_TOKEN }}
   create_tag:
     name: Create Git tag
-    needs: [ generate_version, deploy ]
+    needs: [deploy]
     runs-on: ubuntu-latest
     permissions:
       contents: write

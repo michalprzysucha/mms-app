@@ -5,6 +5,7 @@ plugins {
 }
 
 group = 'org.example'
+version = findProperty('appVersion') ?: '0.0.1-SNAPSHOT'
 
 java {
     toolchain {
