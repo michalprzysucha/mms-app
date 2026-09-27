@@ -17,12 +17,18 @@ repositories {
     mavenCentral()
 }
 
+configurations {
+    jarAgent
+}
+
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter'
     implementation 'org.springframework.boot:spring-boot-starter-webmvc'
     compileOnly 'org.projectlombok:lombok:1.18.48'
 
     annotationProcessor 'org.projectlombok:lombok:1.18.48'
+
+    jarAgent 'com.microsoft.azure:applicationinsights-agent:3.7.9'
 
     testImplementation platform('org.junit:junit-bom:6.0.0')
     testImplementation 'org.junit.jupiter:junit-jupiter'
@@ -36,3 +42,11 @@ test {
 tasks.named('bootJar') {
     archiveFileName = 'mms-app.jar'
 }
+
+tasks.register('copyJarAgent', Copy) {
+    from configurations.jarAgent
+    into layout.buildDirectory.dir('application-insights')
+    rename {'applicationinsights-agent.jar'}
+}
+
+build.dependsOn copyJarAgent
