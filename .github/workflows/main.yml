@@ -55,7 +55,9 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: mms-jar
-          path: build/libs/mms-app.jar
+          path: |
+            build/libs/mms-app.jar
+            build/application-insights/applicationinsights-agent.jar
   build_image:
     name: Build and push Docker image
     needs: [generate_version, build_code]
@@ -63,11 +65,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Download JAR
+      - name: Download build artifacts
         uses: actions/download-artifact@v4
         with:
-          name: mms-jar
-          path: build/libs
+          name: mms-build
+          path: build
       - name: Login to Docker Hub
         uses: docker/login-action@v3
         with:
