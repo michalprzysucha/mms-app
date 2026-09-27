@@ -54,7 +54,7 @@ jobs:
       - name: Upload JAR
         uses: actions/upload-artifact@v4
         with:
-          name: mms-jar
+          name: mms-build
           path: |
             build/libs/mms-app.jar
             build/application-insights/applicationinsights-agent.jar
