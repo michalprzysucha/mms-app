@@ -8,4 +8,4 @@ COPY app-insights/applicationinsights-prod.json applicationinsights-prod.json
 
 EXPOSE 8080
 
-ENTRYPOINT ["java", "-javaagent:/app/applicationinsights-agent.jar", "-jar", "/app/mms.jar"]
+ENTRYPOINT ["java", "-javaagent:applicationinsights-agent.jar", "-jar", "mms.jar"]
