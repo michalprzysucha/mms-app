@@ -7,4 +7,4 @@ COPY build/application-insights/applicationinsights-agent.jar applicationinsight
 
 EXPOSE 8080
 
-ENTRYPOINT ["java", "-javaagent:applicationinsights-agent.jar", "-jar", "mms.jar"]
+ENTRYPOINT ["java", "-Dapplicationinsights.logger.console.level=trace", "-javaagent:applicationinsights-agent.jar", "-jar", "mms.jar"]
