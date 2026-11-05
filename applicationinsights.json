@@ -3,7 +3,7 @@
     "destination": "file+console",
     "level": "DEBUG",
     "file": {
-      "path": "/tmp/applicationinsights.log",
+      "path": "applicationinsights.log",
       "maxSizeMb": 5,
       "maxHistory": 1
     }

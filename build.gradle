@@ -44,9 +44,13 @@ tasks.named('bootJar') {
 }
 
 tasks.register('copyJarAgent', Copy) {
-    from configurations.jarAgent
+    from(configurations.jarAgent) {
+        rename { 'applicationinsights-agent.jar' }
+    }
+
+    from('applicationinsights.json')
+
     into layout.buildDirectory.dir('application-insights')
-    rename {'applicationinsights-agent.jar'}
 }
 
 build.dependsOn copyJarAgent
