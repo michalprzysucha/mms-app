@@ -3,7 +3,7 @@ FROM amazoncorretto:25-jdk
 WORKDIR /app
 
 COPY build/libs/mms-app.jar mms.jar
-COPY applicationinsights-agent.jar applicationinsights-agent.jar
+COPY build/application-insights/applicationinsights-agent.jar applicationinsights-agent.jar
 COPY applicationinsights.json applicationinsights.json
 
 EXPOSE 8080
